@@ -1,11 +1,11 @@
 # EquatePlus SE Edition plugin for MoneyMoney
 
-A quick and dirty plugin for MoneyMoney for share depot - specifically for Equate Plus SE depots.
+A quick and dirty plugin for MoneyMoney for share depot - specifically for Equate Plus SE depots. Now with the functionality to retrieve corporate share plans of your employer.
 This is a pure personal and private project and has absolutely no relationship to any company - but might be usefull for SE employees.
 
 It may work or not work for other depots.
 
-Released version is now signed and will run in released versions of the MoneyMoney App.
+Released version is ncurrently not signed and will only run in beta versions of the MoneyMoney App.
 
 
 ## ToDos
@@ -16,8 +16,8 @@ Released version is now signed and will run in released versions of the MoneyMon
 
 ## Credits 
 
-Forked from Michael-Beutling as my specific depot requires different mapping.
-Really all I changed was the mapping - so main credits to go to Michael-Beutling.
+Forked from neatc0der, who forked from Michael-Beutling as my specific corporate shares depot requires different mapping which I added to my fork.
+Main credits to go to Michael-Beutling and the others in the fork chain, as I only added functionality for corporate share plans.
 
 For all changes done by me, the MIT License applies. For original license, please visit:
 https://github.com/Michael-Beutling/equateplus-moneymoney

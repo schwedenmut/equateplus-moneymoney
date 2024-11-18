@@ -3,7 +3,7 @@ local url="https://www.equateplus.com"
 
 local baseurl=""
 local reportOnce
-local Version="1.17"
+local Version="2.00"
 local CSRF_TOKEN=nil
 local csrfpId=nil
 local connection
@@ -200,6 +200,7 @@ function RefreshAccount (account, since)
   reportOnce=true
   local status,err = pcall( function()
     for k,v in pairs(summary["entries"]) do
+      local globalID = v["id"]
       local details=JSON(connectWithCSRF("POST","services/planDetails/get","{\"$type\":\"EntityIdentifier\",\"id\":\""..v["id"].."\"}")):dictionary()
       if debugging then tprint (details) end
       local status,err = pcall( function()
@@ -272,6 +273,19 @@ function RefreshAccount (account, since)
                       while nameKey and name == nil do
                         name = v[nameKey.value]
                         nameKey = nameKey.next
+                      end
+
+                      -- Employee share program
+                      if name == nil then
+                        local fullDetail = JSON(connectWithCSRF("POST","services/planDetails/record","{\"$type\":\"NestedEntityIdentifier\",\"id\":\""..v["ID"].."\",\"parentId\":\""..globalID.."\"}")):dictionary()
+                        if debugging then tprint (fullDetail["entries"]) end
+                        for k,v in pairs(fullDetail["entries"]) do
+                            local status,err = pcall( function()
+                                name = v["allocation"]["vehicleDescription"]
+                                if debugging then print(name) end
+                            end)
+                            bugReport(status,err,fullDetail)
+                        end
                       end
 
                       -- feature for future version of MoneyMoney (request confirmed on 2022-02-10 by MRH)
